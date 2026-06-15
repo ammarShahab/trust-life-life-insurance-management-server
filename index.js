@@ -6,6 +6,10 @@ const connectDB = require("./config/db");
 const policyRoutes = require("./routes/policyRoutes");
 const customerRoutes = require("./routes/customerRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
+const blogRoutes = require("./routes/blogRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
+const newsletterRoutes = require("./routes/newsletterRoutes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,6 +36,10 @@ connectDB();
 app.use(policyRoutes);
 app.use(customerRoutes);
 app.use(applicationRoutes);
+app.use(paymentRoutes);
+app.use(blogRoutes);
+app.use(reviewRoutes);
+app.use(newsletterRoutes);
 
 // ========== Base Route ==========
 app.get("/", (req, res) => {
