@@ -5,6 +5,7 @@ const admin = require("firebase-admin");
 const connectDB = require("./config/db");
 const policyRoutes = require("./routes/policyRoutes");
 const customerRoutes = require("./routes/customerRoutes");
+const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,6 +31,7 @@ connectDB();
 // Policy routes (includes /policies, /all-policies, /popular-policies, etc.)
 app.use(policyRoutes);
 app.use(customerRoutes);
+app.use(applicationRoutes);
 
 // ========== Base Route ==========
 app.get("/", (req, res) => {
