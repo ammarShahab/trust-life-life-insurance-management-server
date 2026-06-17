@@ -1,4 +1,4 @@
-// models/Newsletter.js
+// models/newsletter.js
 
 const { default: mongoose } = require("mongoose");
 
@@ -34,5 +34,5 @@ const newsletterSchema = new mongoose.Schema(
 // Index for fast email lookups
 // newsletterSchema.index({ email: 1 });
 
-const Newsletter = mongoose.model("Newsletter", newsletterSchema);
-module.exports = Newsletter;
+const newsletter = mongoose.model("newsletter", newsletterSchema);
+module.exports = newsletter;

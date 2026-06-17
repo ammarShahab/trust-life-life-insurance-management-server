@@ -1,5 +1,5 @@
 // controllers/newsletterController.js
-const Newsletter = require("../models/Newsletter.js");
+const newsletter = require("../models/newsletter.js");
 
 // @desc    Subscribe to newsletter
 // @route   POST /newsletter-subscription
@@ -12,7 +12,7 @@ const subscribeNewsletter = async (req, res) => {
       return res.status(400).json({ message: "Name and email are required." });
     }
 
-    const newSubscription = new Newsletter({
+    const newSubscription = new newsletter({
       name,
       email,
       subscribedAt: new Date(),
@@ -52,7 +52,7 @@ const subscribeNewsletter = async (req, res) => {
 // @access  Private (admin only)
 const getAllSubscribers = async (req, res) => {
   try {
-    const subscribers = await Newsletter.find().sort({ subscribedAt: -1 });
+    const subscribers = await newsletter.find().sort({ subscribedAt: -1 });
     res.status(200).json(subscribers);
   } catch (error) {
     console.error("Error fetching subscribers:", error);
