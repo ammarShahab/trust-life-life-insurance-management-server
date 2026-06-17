@@ -59,10 +59,13 @@ const getAllPoliciesPublic = async (req, res) => {
     }
 
     if (search) {
-      // Use text search if available, fallback to regex
+      // Use regex for ALL search lengths — partial matching on title, description, and category
+      const searchRegex = { $regex: search, $options: "i" };
+
       filter.$or = [
-        { title: { $regex: search, $options: "i" } },
-        { description: { $regex: search, $options: "i" } },
+        { title: searchRegex },
+        { description: searchRegex },
+        { category: searchRegex }, // Also search category names
       ];
     }
 
