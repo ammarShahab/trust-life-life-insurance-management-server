@@ -278,7 +278,7 @@ const submitClaim = async (req, res) => {
       return res.status(404).json({ message: "Application not found" });
     }
 
-    res.status(200).json(application);
+    res.status(200).json({ modifiedCount: 1, application });
   } catch (error) {
     console.error("Error submitting claim:", error);
 
