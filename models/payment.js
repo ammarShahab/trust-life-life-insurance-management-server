@@ -62,7 +62,7 @@ const paymentSchema = new mongoose.Schema(
     paymentDuration: {
       type: String,
       enum: {
-        values: ["monthly", "yearly", "quarterly", "half-yearly"],
+        values: ["monthly", "yearly"],
         message: "Payment duration '{VALUE}' is not supported",
       },
       default: "monthly",

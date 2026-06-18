@@ -92,6 +92,14 @@ const applicationSchema = new mongoose.Schema(
       required: [true, "Duration is required"],
       min: [1, "Duration must be at least 1 year"],
     },
+    paymentDuration: {
+      type: String,
+      enum: {
+        values: ["monthly", "yearly", "quarterly", "half-yearly"],
+        message: "Payment duration '{VALUE}' is not supported",
+      },
+      default: "monthly",
+    },
 
     // Application Status
     appliedDate: {

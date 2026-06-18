@@ -50,10 +50,13 @@ const savePayment = async (req, res) => {
       return res.status(403).json({ message: "Forbidden access" });
     }
 
-    // Update application status to "paid"
+    // Update application status to "paid" and save payment duration
     const applicationUpdate = await Application.findByIdAndUpdate(
       applicationId,
-      { status: "paid" },
+      { 
+        status: "paid",
+        paymentDuration: paymentDuration || "monthly"
+      },
       { new: true },
     );
 
