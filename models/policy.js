@@ -60,6 +60,11 @@ const policySchema = new mongoose.Schema(
       required: [true, "Premium is required"],
       trim: true,
     },
+    premiumNumeric: {
+      type: Number,
+      default: 0,
+      min: [0, "Premium numeric cannot be negative"],
+    },
     image: {
       type: String,
       required: [true, "Image URL is required"],
@@ -80,10 +85,35 @@ const policySchema = new mongoose.Schema(
   },
 );
 
+// Auto-parse premium string to numeric value
+function parsePremiumToNumber(premiumStr) {
+  if (!premiumStr) return 0;
+  const num = parseFloat(premiumStr.replace(/[^0-9.]/g, ""));
+  return isNaN(num) ? 0 : num;
+}
+
+policySchema.pre("save", function (next) {
+  if (this.isModified("premium")) {
+    this.premiumNumeric = parsePremiumToNumber(this.premium);
+  }
+  next();
+});
+
+policySchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate();
+  if (update.premium) {
+    update.premiumNumeric = parsePremiumToNumber(update.premium);
+  } else if (update.$set && update.$set.premium) {
+    update.$set.premiumNumeric = parsePremiumToNumber(update.$set.premium);
+  }
+  next();
+});
+
 // Indexes for fast queries
 policySchema.index({ category: 1 });
 policySchema.index({ purchasedCount: -1 });
 policySchema.index({ title: "text", description: "text" });
+policySchema.index({ premiumNumeric: 1 });
 
 const Policy = mongoose.model("Policy", policySchema);
 module.exports = Policy;
