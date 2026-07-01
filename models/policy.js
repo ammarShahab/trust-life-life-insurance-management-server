@@ -99,14 +99,13 @@ policySchema.pre("save", function (next) {
   next();
 });
 
-policySchema.pre("findOneAndUpdate", function (next) {
+policySchema.pre("findOneAndUpdate", async function () {
   const update = this.getUpdate();
   if (update.premium) {
     update.premiumNumeric = parsePremiumToNumber(update.premium);
   } else if (update.$set && update.$set.premium) {
     update.$set.premiumNumeric = parsePremiumToNumber(update.$set.premium);
   }
-  next();
 });
 
 // Indexes for fast queries

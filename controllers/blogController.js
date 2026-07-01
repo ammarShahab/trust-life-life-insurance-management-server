@@ -116,7 +116,7 @@ const incrementVisit = async (req, res) => {
     const blog = await Blog.findByIdAndUpdate(
       id,
       { $inc: { totalVisit: 1 } },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!blog) {
@@ -151,7 +151,7 @@ const updateBlog = async (req, res) => {
         imageUrl,
         publishDate: new Date(),
       },
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!blog) {

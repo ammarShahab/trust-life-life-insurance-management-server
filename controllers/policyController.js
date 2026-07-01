@@ -138,7 +138,7 @@ const updatePolicy = async (req, res) => {
     delete updatedData._id;
 
     const policy = await Policy.findByIdAndUpdate(id, updatedData, {
-      new: true, // Return the updated document
+      returnDocument: "after", // Return the updated document
       runValidators: true, // Run schema validators on update too
     });
 

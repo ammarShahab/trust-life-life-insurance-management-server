@@ -57,7 +57,7 @@ const savePayment = async (req, res) => {
         status: "paid",
         paymentDuration: paymentDuration || "monthly"
       },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!applicationUpdate) {

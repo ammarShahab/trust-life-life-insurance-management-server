@@ -121,7 +121,7 @@ const assignAgent = async (req, res) => {
         agentEmail,
         agent_status: "pending",
       },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!application) {
@@ -154,7 +154,7 @@ const rejectApplication = async (req, res) => {
     const application = await Application.findByIdAndUpdate(
       id,
       { status: "rejected" },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!application) {
@@ -209,7 +209,7 @@ const updateAgentStatus = async (req, res) => {
     const application = await Application.findByIdAndUpdate(
       id,
       { agent_status },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!application) {
@@ -271,7 +271,7 @@ const submitClaim = async (req, res) => {
     const application = await Application.findByIdAndUpdate(
       applicationId,
       { claim_reason, claim_document, claim_status },
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!application) {

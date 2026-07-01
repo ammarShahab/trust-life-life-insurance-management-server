@@ -87,7 +87,7 @@ const updateLastLogin = async (req, res) => {
     const customer = await Customer.findOneAndUpdate(
       { email },
       { lastSignInTime },
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!customer) {
@@ -144,7 +144,7 @@ const updateCustomer = async (req, res) => {
     const customer = await Customer.findOneAndUpdate(
       { email },
       { customerName, photoURL },
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!customer) {
@@ -249,7 +249,7 @@ const promoteToAgent = async (req, res) => {
     const customer = await Customer.findByIdAndUpdate(
       id,
       { role: "agent" },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!customer) {
@@ -281,7 +281,7 @@ const demoteToCustomer = async (req, res) => {
     const customer = await Customer.findByIdAndUpdate(
       id,
       { role: "customer" },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!customer) {
