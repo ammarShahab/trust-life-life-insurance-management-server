@@ -66,7 +66,7 @@ const getAllPoliciesPublic = async (req, res) => {
     // Server-side sorting — each field has a supporting index
     const validSortFields = {
       createdAt: "createdAt",     // auto-index from timestamps:true
-      premium: "premiumNumeric",  // { premiumNumeric: 1 } index
+      premium: "premium",         // { premium: 1 } index
       popular: "purchasedCount",  // { purchasedCount: -1 } index
     };
 

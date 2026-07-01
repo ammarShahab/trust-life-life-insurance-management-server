@@ -341,6 +341,8 @@ const getAgentClaims = async (req, res) => {
             description: "$policyInfo.description",
             coverage: "$policyInfo.coverage",
             duration: "$policyInfo.duration",
+            premium: "$policyInfo.premium",
+            premiumDisplay: "$policyInfo.premiumDisplay",
           },
         },
       },
